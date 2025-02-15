@@ -26,9 +26,9 @@
 
           <template v-else>
             <span class="text-gray-300">|</span>
-            <RouterLink to="/myposts" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-              :class="{ 'text-indigo-600 font-semibold': $route.path === '/myposts' }">
-              Posztjaim
+            <RouterLink to="/newpost" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              :class="{ 'text-indigo-600 font-semibold': $route.path === '/newpost' }">
+              Új poszt
             </RouterLink>
             <span class="text-gray-300">|</span>
 

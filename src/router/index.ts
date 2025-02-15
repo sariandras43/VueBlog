@@ -30,13 +30,21 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/posts/:id',
     name: 'Post',
-    component: () => import('../views/Post.vue')
+    component: () => import('../views/Post.vue'),
+    props:true
   },
   {
-    path: '/myposts',
-    name: 'MyPosts',
-    component: () => import('../views/MyPosts.vue'),
+    path: '/editpost/:id?',
+    name: 'EditPost',
+    component: () => import('../views/EditPost.vue'),
     meta: { requiresAuth: true },
+    props:true
+  },
+  {
+    path: '/newpost',
+    name: 'newpost',
+    component: () => import('../views/NewPost.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 

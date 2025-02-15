@@ -128,9 +128,85 @@ server.put('/profile/change-password', (req, res) => {
   res.status(200).json({ message: 'Jelszó sikeresen megváltoztatva' })
 })
 
-server.get("/posts",(req,res,next)=>{
-  return res.status(200).json(router.db.get('posts').value())
-})
+server.get("/posts", (req, res, next) => {
+  return res.status(200).json(router.db.get('posts').value());
+});
+
+server.get("/posts/:id", (req, res, next) => {
+  const { id } = req.params;
+  // json-server automatically handles the query based on the id
+  const post = router.db.get('posts').find({ id: parseInt(id) }).value(); 
+
+  if (!post) {
+    return res.status(404).json({ error: "Poszt nem található" });
+  }
+
+  return res.status(200).json(post); // Return the found post
+});
+
+server.delete("/posts/:id", (req, res, next) => {
+  const { id } = req.params;
+  // Find the post by id
+  const post = router.db.get('posts').find({ id: parseInt(id) }).value();
+
+  if (!post) {
+    return res.status(404).json({ error: "Poszt nem található" });
+  }
+
+  // Remove the post from the database
+  router.db.get('posts').remove({ id: parseInt(id) }).write();
+
+  return res.status(200).json({ message: "Poszt sikeresen törölve" });
+});
+
+
+
+server.put("/posts/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { title, subTitle, text, shortText, imageUrl, category } = req.body;
+
+  const post = router.db.get('posts').find({ id: parseInt(id) }).value();
+
+  if (!post) {
+    return res.status(404).json({ error: "Poszt nem található" });
+  }
+
+  // Update the post data
+  router.db.get('posts')
+    .find({ id: parseInt(id) })
+    .assign({ title, subTitle, text, shortText, imageUrl, category })
+    .write();
+
+  return res.status(200).json({ message: "Post updated successfully", post: { id, title, subTitle, text, shortText, imageUrl, category } });
+});
+
+server.post("/posts", (req, res, next) => {
+  const { title, subTitle, text, shortText, imageUrl, category } = req.body;
+
+  if (title === "" || subTitle === "" || text === "" || shortText === "" || imageUrl === "" || category === "") {
+    return res.status(400).json({ error: "Minden mezőt ki kell tölteni" });
+  }
+
+  const newPost = {
+    title,
+    subTitle,
+    text,
+    shortText,
+    imageUrl,
+    category
+  };
+
+  // json-server automatically assigns an id
+  router.db.get('posts').push(newPost).write();
+
+  return res.status(201).json({
+    message: "Post sikeresen létrehozva",
+    post: newPost
+  });
+});
+
+
+
 // Protected endpoint middleware
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
   if (

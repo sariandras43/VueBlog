@@ -4,11 +4,11 @@
     <!-- <p>Ez egy egyszerű autentikációs példa alkalmazás Vue 3 és JWT használatával.</p>
     <p>Az applikációban bemutatásra kerül, hogyan készíts védett oldalakat, mint a Profil oldal.</p> -->
     <div class="flex items-center space-x-4 my-4 mx-auto p-4 border border-gray-300 rounded-lg shadow-md">
-      <input type="text" id="search" placeholder="Keresés a címekben"
+      <input type="text" v-model="titleToSearch" id="search" placeholder="Keresés a címekben"
         class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-      <button
+      <button @click="getData()"
         class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        Search
+        Keresés
       </button>
     </div>
 
@@ -28,14 +28,21 @@
                 p.category }}
             </span>
           </div>
-          <div class="px-6 pb-4">
-            <RouterLink :to="`posts/${p.id}`" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2
-              focus:ring-blue-400">
+          <div class="flex flex-col">
+            <RouterLink :to="`posts/${p.id}`"
+              class="w-25 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition m-2">
               Tovább olvasom
             </RouterLink>
+            <RouterLink v-if="authStore.isAuthenticated" :to="`editpost/${p.id}`"
+              class="w-25 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300 transition m-2">
+              Módosítás
+            </RouterLink>
+            <button @click="deletePost(p.id)" v-if="authStore.isAuthenticated" :to="`posts/${p.id}`"
+              class="w-25 bg-red-500 text-left text-white px-6 py-3 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300 transition m-2">
+              Törlés
+            </button>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -44,16 +51,33 @@
 </template>
 
 <script lang="ts" setup>
+import { useAuthStore } from '@/stores/auth';
 import { Post } from '@/types/post';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+const authStore = useAuthStore()
 
 const posts = ref<Post[]>();
+const titleToSearch = ref<string>("")
+let page = 1;
+let maxPage: number;
 
-onMounted(() => {
+function getData() {
   axios.get<Post[]>("http://localhost:3000/posts").then((res: Post[] | any) => {
     posts.value = res.data;
-    console.log(posts.value);
+    maxPage = (res.data.length / 6) + 1
   })
+}
+onMounted(() => {
+  getData();
 })
+
+function deletePost(id) {
+  alert(id)
+  axios.delete("http://localhost:3000/posts/" + id)
+    .then((res) => {
+      getData();
+    })
+    .catch((err: Error) => alert(err.message))
+}
 </script>

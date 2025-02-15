@@ -15,7 +15,7 @@
   ],
   "posts": [
     {
-      "id":112121323232,
+      "id": 112121323232,
       "title": "testtitle",
       "subTitle": "subtitle",
       "text": "text",
@@ -24,7 +24,7 @@
       "category": "education"
     },
     {
-      "id":4234,
+      "id": 4234,
       "title": "testtitle",
       "subTitle": "subtitle",
       "text": "text",
@@ -33,31 +33,21 @@
       "category": "education"
     },
     {
-      "id":43234,
-      "title": "testtitle",
+      "id": 43234,
+      "title": "testtitleassasas",
       "subTitle": "subtitle",
       "text": "text",
       "shortText": "shorttext",
       "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
-      "category": "education"
+      "category": "edu"
     },
     {
-      "id":423432,
-      "title": "testtitle",
-      "subTitle": "subtitle",
-      "text": "text",
-      "shortText": "shorttext",
-      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
-      "category": "education"
-    },
-    {
-      "id":423435,
-      "title": "testtitle",
-      "subTitle": "subtitle",
-      "text": "text",
-      "shortText": "shorttext",
-      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
-      "category": "education"
+      "title": "asd",
+      "subTitle": "asasa",
+      "text": "asas",
+      "shortText": "assasas",
+      "imageUrl": "hash://asasaas.asasas",
+      "category": "educat"
     }
   ]
 }
