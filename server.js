@@ -181,13 +181,14 @@ server.put("/posts/:id", (req, res, next) => {
 });
 
 server.post("/posts", (req, res, next) => {
-  const { title, subTitle, text, shortText, imageUrl, category } = req.body;
+  const { id,title, subTitle, text, shortText, imageUrl, category } = req.body;
 
   if (title === "" || subTitle === "" || text === "" || shortText === "" || imageUrl === "" || category === "") {
     return res.status(400).json({ error: "Minden mezőt ki kell tölteni" });
   }
 
   const newPost = {
+    id:Date.now(),
     title,
     subTitle,
     text,

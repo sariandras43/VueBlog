@@ -1,8 +1,5 @@
 <template>
   <main>
-    <h1>Üdvözöllek a blogomon!</h1>
-    <!-- <p>Ez egy egyszerű autentikációs példa alkalmazás Vue 3 és JWT használatával.</p>
-    <p>Az applikációban bemutatásra kerül, hogyan készíts védett oldalakat, mint a Profil oldal.</p> -->
     <div class="flex items-center space-x-4 my-4 mx-auto p-4 border border-gray-300 rounded-lg shadow-md">
       <input type="text" v-model="titleToSearch" id="search" placeholder="Keresés a címekben"
         class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -33,11 +30,11 @@
               class="w-25 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition m-2">
               Tovább olvasom
             </RouterLink>
-            <RouterLink v-if="authStore.isAuthenticated" :to="`editpost/${p.id}`"
-              class="w-25 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300 transition m-2">
+            <RouterLink :to="`editpost/${p.id}`" v-if="authStore.isAuthenticated"
+              class="w-25 bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-300 transition m-2">
               Módosítás
             </RouterLink>
-            <button @click="deletePost(p.id)" v-if="authStore.isAuthenticated" :to="`posts/${p.id}`"
+            <button @click="deletePost(p.id)" :to="`posts/${p.id}`" v-if="authStore.isAuthenticated"
               class="w-25 bg-red-500 text-left text-white px-6 py-3 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300 transition m-2">
               Törlés
             </button>
@@ -46,6 +43,12 @@
       </div>
     </div>
 
+    <div class="flex justify-center space-x-2" v-if="pages.length !== 1">
+      <button class="w-8 h-8 rounded-full bg-blue-500 hover:bg-blue-500 text-white flex items-center justify-center"
+        v-for="p in pages" @click="getData(p - 1)">
+        {{ p }}
+      </button>
+    </div>
 
   </main>
 </template>
@@ -58,15 +61,42 @@ import { onMounted, ref } from 'vue';
 const authStore = useAuthStore()
 
 const posts = ref<Post[]>();
-const titleToSearch = ref<string>("")
-let page = 1;
+const titleToSearch = ref<string>("");
 let maxPage: number;
+let currentPage = 1;
+const pages = ref<number[]>([]);
 
-function getData() {
-  axios.get<Post[]>("http://localhost:3000/posts").then((res: Post[] | any) => {
-    posts.value = res.data;
-    maxPage = (res.data.length / 6) + 1
-  })
+
+async function getData(pageIndex = 0) {
+
+  let appropriateCounter = 0;
+  await axios.get<Post[]>("http://localhost:3000/posts")
+    .then((res: Post[] | any) => {
+      posts.value = [];
+      for (let i = pageIndex * 8; i < 8 * (pageIndex + 1); i++) {
+        const post: Post = res.data[i];
+        currentPage = pageIndex + 1;
+        if (post.title.includes(titleToSearch.value)) {
+          posts.value.push(post)
+        }
+      }
+      if (!titleToSearch.value) {
+        maxPage = (res.data.length / 8) + 1;
+      }
+      else {
+        res.data.forEach(post => {
+          if (post.title.includes(titleToSearch.value)) {
+            appropriateCounter++;
+          }
+        });
+        maxPage = (appropriateCounter / 8) + 1;
+      }
+    })
+
+  pages.value = [];
+  for (let n = 1; n <= maxPage; n++) {
+    pages.value.push(n);
+  }
 }
 onMounted(() => {
   getData();

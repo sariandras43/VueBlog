@@ -8,21 +8,12 @@
     },
     {
       "id": 1739618481029,
-      "name": "kis herceg",
+      "name": "Kis Herceg",
       "email": "herceg@gmail.com",
       "password": "$2a$08$xnpbJwH/edaf8BoQ.OtfiefnG3aqONHJ/qosJfr5vdF87PEBxJtYe"
     }
   ],
   "posts": [
-    {
-      "id": 112121323232,
-      "title": "testtitle",
-      "subTitle": "subtitle",
-      "text": "text",
-      "shortText": "shorttext",
-      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
-      "category": "education"
-    },
     {
       "id": 4234,
       "title": "testtitle",
@@ -42,12 +33,76 @@
       "category": "edu"
     },
     {
-      "title": "asd",
-      "subTitle": "asasa",
-      "text": "asas",
-      "shortText": "assasas",
-      "imageUrl": "hash://asasaas.asasas",
-      "category": "educat"
+      "id": 1739657805053,
+      "title": "sasad",
+      "subTitle": "sadads",
+      "text": "dasads",
+      "shortText": "sadsad",
+      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
+      "category": "aasa"
+    },
+    {
+      "id": 1,
+      "title": "sasad",
+      "subTitle": "sadads",
+      "text": "dasads",
+      "shortText": "sadsad",
+      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
+      "category": "aasa"
+    },
+    {
+      "id": 2,
+      "title": "sasad",
+      "subTitle": "sadads",
+      "text": "dasads",
+      "shortText": "sadsad",
+      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
+      "category": "aasa"
+    },
+    {
+      "id": 3,
+      "title": "sasad",
+      "subTitle": "sadads",
+      "text": "dasads",
+      "shortText": "sadsad",
+      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
+      "category": "aasa"
+    },
+    {
+      "id": 4,
+      "title": "sasad",
+      "subTitle": "sadads",
+      "text": "dasads",
+      "shortText": "sadsad",
+      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
+      "category": "aasa"
+    },
+    {
+      "id": 5,
+      "title": "sasad",
+      "subTitle": "sadads",
+      "text": "dasads",
+      "shortText": "sadsad",
+      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
+      "category": "aasa"
+    },
+    {
+      "id": 6,
+      "title": "sasad",
+      "subTitle": "sadads",
+      "text": "dasads",
+      "shortText": "sadsad",
+      "imageUrl": "https://ttr.sze.hu/img/sze_logo.92cdd6d0.png",
+      "category": "aasa"
+    },
+    {
+      "id": 1739661326161,
+      "title": "A banán élete",
+      "subTitle": "Banános Joe",
+      "text": "Egyszer egy banán a fán lógott, és azt gondolta, hogy unalmas az élete. Mikor végre leszakadt, izgatottan indult el a világ felfedezésére. Útja során találkozott egy kedves mókussal, aki elmesélte neki, hogy minden gyümölcsnek megvan a maga célja. A banán rájött, hogy ő nemcsak finom, hanem energiát adó és boldogságot hozó ajándék is. Hálásan visszament a fákhoz, hogy megossza történetét más gyümölcsökkel, és sosem érezte többé unalmasnak az életét.",
+      "shortText": "Banános Joe",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg",
+      "category": "viccek"
     }
   ]
 }

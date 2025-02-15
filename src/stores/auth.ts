@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
   const token = ref<string | null>(null)
 
   const isAuthenticated = computed(() => !!token.value)
-
+  console.log(isAuthenticated)
   // Token kezelés
   const setToken = (newToken: string | null) => {
     token.value = newToken

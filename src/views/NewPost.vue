@@ -46,6 +46,10 @@
                         class="w-full bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
                         Mentés
                     </button>
+                    <div class="text-center bg-red-600">
+                        <p class="">{{ errorMessage }}</p>
+
+                    </div>
                 </div>
             </form>
         </div>
@@ -53,11 +57,13 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router';
 import { Post } from '@/types/post';
 import axios from 'axios';
 import { ref } from 'vue';
 
 const post = ref<Post>({
+    id: undefined,
     category: "",
     imageUrl: "",
     shortText: "",
@@ -68,14 +74,13 @@ const post = ref<Post>({
 const errorMessage = ref('')
 
 
-function newPost() {
-    axios.post<Post>("http://localhost:3000/posts", post.value)
+async function newPost() {
+    await axios.post<Post>("http://localhost:3000/posts", post.value)
         .then((res: Post | any) => {
-            // router.push("/")
-            console.log(res)
+            router.push("/")
         })
         .catch((err: Error) => {
-            alert(err.message)
+            errorMessage.value = err.message;
         })
 }
 </script>

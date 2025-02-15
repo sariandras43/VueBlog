@@ -31,7 +31,8 @@ const routes: RouteRecordRaw[] = [
     path: '/posts/:id',
     name: 'Post',
     component: () => import('../views/Post.vue'),
-    props:true
+    props:true,
+    meta: { requiresGuest: true, }
   },
   {
     path: '/editpost/:id?',
