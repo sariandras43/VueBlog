@@ -59,7 +59,7 @@ import { Post } from '@/types/post';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 const authStore = useAuthStore()
-
+authStore.initializeAuth()
 const posts = ref<Post[]>();
 const titleToSearch = ref<string>("");
 let maxPage: number;
@@ -81,7 +81,13 @@ async function getData(pageIndex = 0) {
         }
       }
       if (!titleToSearch.value) {
-        maxPage = (res.data.length / 8) + 1;
+        if (res.data.length % 8 == 0) {
+          maxPage = (res.data.length / 8)
+        } else {
+          maxPage = (res.data.length / 8) + 1;
+
+        }
+
       }
       else {
         res.data.forEach(post => {
@@ -89,7 +95,11 @@ async function getData(pageIndex = 0) {
             appropriateCounter++;
           }
         });
-        maxPage = (appropriateCounter / 8) + 1;
+        if (appropriateCounter % 8 == 0) {
+          maxPage = (appropriateCounter / 8)
+        } else {
+          maxPage = (appropriateCounter / 8) + 1;
+        }
       }
     })
 
@@ -103,7 +113,6 @@ onMounted(() => {
 })
 
 function deletePost(id) {
-  alert(id)
   axios.delete("http://localhost:3000/posts/" + id)
     .then((res) => {
       getData();

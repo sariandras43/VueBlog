@@ -55,8 +55,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore()
-
+  const authStore = useAuthStore();
+  authStore.initializeAuth();
   // Védett útvonal kezelése
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login')
