@@ -8,6 +8,11 @@
             :class="{ 'text-indigo-600 font-semibold': $route.path === '/' }">
             Kezdőlap
           </RouterLink>
+          <RouterLink to="/categories"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+            :class="{ 'text-indigo-600 font-semibold': $route.path === '/categories' }">
+            Kategóriák
+          </RouterLink>
 
           <template v-if="!authStore.isAuthenticated">
             <span class="text-gray-300">|</span>
